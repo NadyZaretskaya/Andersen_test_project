@@ -1,7 +1,10 @@
 package com.andersenlab.driver;
 
+import com.andersenlab.utils.WebDriverListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.platform.commons.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -9,11 +12,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+
 import java.util.concurrent.TimeUnit;
-import java.util.logging.LogManager;
 
 public class DriverSingleton {
-    static Logger log = LogManager.;
+    static Logger log = LogManager.getRootLogger();
     private static EventFiringWebDriver driver;
 
     private DriverSingleton() {
@@ -44,6 +47,8 @@ public class DriverSingleton {
                     }
                 }
             } catch (Exception e) {
+                WebDriverManager.chromedriver().setup();
+                driver = new EventFiringWebDriver(new ChromeDriver());
                 log.info("Property 'driver' was not set, setting up the default browser - Chrome");
             }
         }
@@ -51,7 +56,6 @@ public class DriverSingleton {
         driver.register(new WebDriverListener());
         setUpDriver();
         log.info("Initiated of driver successfully. Driver:" + driver.getClass().getName());
-        log.info(driver.getCapabilities());
         return driver;
     }
 
@@ -66,5 +70,4 @@ public class DriverSingleton {
             driver = null;
         }
     }
-}
 }
