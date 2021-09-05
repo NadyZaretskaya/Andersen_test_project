@@ -1,7 +1,5 @@
 package com.andersenlab.tests;
 
-import com.andersenlab.pageObjects.crmGeekBrains.ContactsPage;
-import com.andersenlab.pageObjects.crmGeekBrains.DashboardPage;
 import com.andersenlab.pageObjects.phpTravels.MainPage;
 import com.andersenlab.pageObjects.phpTravels.TravelsSignupPage;
 import com.andersenlab.users.PhpTravelsUsers;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class PhpTravelsTest extends BaseTest{
     protected static final String BASE_URL = "https://phptravels.net";
-    PhpTravelsUsers admin = new PhpTravelsUsers("Applanatest1", "Student2020!");
     PhpTravelsUsers baseUser = new PhpTravelsUsers("Zaretskaya", "Nady",
             "212 123 456", "nady.zaretskaya", "123321");
 

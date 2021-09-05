@@ -2,15 +2,15 @@ package com.andersenlab.pageObjects;
 
 import com.andersenlab.driver.DriverSingleton;
 import com.andersenlab.utils.Waiters;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BasePage {
-    static Logger log = LogManager.getRootLogger();
+//    private static Logger log = LoggerFactory.getLogger(BasePage.class);
     private WebDriver driver = DriverSingleton.getDriver();
 
     public void open(String url) {

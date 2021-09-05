@@ -3,20 +3,22 @@ package com.andersenlab.driver;
 import com.andersenlab.utils.WebDriverListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.concurrent.TimeUnit;
 
 public class DriverSingleton {
-    static Logger log = LogManager.getRootLogger();
+    private static Logger log = LoggerFactory.getLogger(DriverSingleton.class);
     private static EventFiringWebDriver driver;
 
     private DriverSingleton() {
