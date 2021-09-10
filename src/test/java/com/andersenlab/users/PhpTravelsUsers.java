@@ -16,7 +16,7 @@ public class PhpTravelsUsers {
     public PhpTravelsUsers(String adminLogin, String adminPassword) {
         this.adminLogin = adminLogin;
         this.adminPassword = adminPassword;
-    };
+    }
 
     public PhpTravelsUsers(String baseUserLastName, String baseUserName, String baseUserPhone, String baseUserEmail,
                            String baseUserPassword) {
@@ -26,7 +26,7 @@ public class PhpTravelsUsers {
         this.baseUserEmail = baseUserEmail + date + "@example.com";
         this.baseUserPassword = baseUserPassword;
 
-    };
+    }
 
     public String getAdminLogin() {
         return adminLogin;
@@ -54,6 +54,10 @@ public class PhpTravelsUsers {
 
     public String getBaseUserPassword() {
         return baseUserPassword;
+    }
+
+    public void setBaseUserPassword(String baseUserPassword) {
+        this.baseUserPassword = baseUserPassword;
     }
 
 }

@@ -23,8 +23,6 @@ public class CreateNewProjectPage extends BasePage {
     protected static final By PROJECT_ADMINISTRATOR_INPUT = By.xpath("//span[text()=\"Выберите администратора продаж\"]");
     protected static final By PROJECT_MANAGER_INPUT = By.xpath("//span[text()=\"Выберите менеджера\"]");
     protected static final By PROJECT_CONTACT_MAIN_INPUT = By.xpath("//*[text()='Основное контактное лицо']/../..//input");
-
-//    public static final String BUSINESS_UNIT_VALUE = "Research & Development";
     protected static final By BUSINESS_UNIT_VALUE = By.xpath("//div[contains(text(),\"Research & Development\")]");
 
     public MyProjectsPage createNewProject(String projectName, String businessUnit, String responsiblePerson, String contactLastFirstName) {

@@ -1,7 +1,7 @@
 package com.andersenlab.tests;
 
-import com.andersenlab.pageObjects.phpTravels.MainPage;
-import com.andersenlab.pageObjects.phpTravels.TravelsSignupPage;
+import com.andersenlab.pageObjects.crmGeekBrains.DashboardPage;
+import com.andersenlab.pageObjects.phpTravels.*;
 import com.andersenlab.users.PhpTravelsUsers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -12,9 +12,14 @@ public class PhpTravelsTest extends BaseTest{
     protected static final String BASE_URL = "https://phptravels.net";
     PhpTravelsUsers baseUser = new PhpTravelsUsers("Zaretskaya", "Nady",
             "212 123 456", "nady.zaretskaya", "123321");
+    PhpTravelsUsers invalidUser = new PhpTravelsUsers("Ilushina", "Viktoria",
+            "212 654 321", "victoria.ilushina", "999666");
 
     MainPage mainPage;
     TravelsSignupPage signupPage;
+    LoginPage loginPage;
+    UserDashboardPage userDashboardPage;
+    UserProfilePage userProfilePage;
 
 
     @BeforeEach
@@ -28,6 +33,9 @@ public class PhpTravelsTest extends BaseTest{
         super.tearDown();
         signupPage = null;
         mainPage = null;
+        loginPage = null;
+        userDashboardPage = null;
+        userProfilePage = null;
     }
 
     @Test
@@ -48,4 +56,67 @@ public class PhpTravelsTest extends BaseTest{
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(TravelsSignupPage.OCCUPIED_EMAIL_MESSAGE, mainPage.getErrorEmailMessage());
     }
+
+    @Test
+    public void loginWithValidUser() {
+        signupPage = mainPage.pushSignUpButton();
+        mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
+                baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
+    }
+
+    @Test
+    public void loginWithInvalidPassword() {
+        signupPage = mainPage.pushSignUpButton();
+        mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
+                baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), invalidUser.getBaseUserPassword());
+        Assertions.assertEquals(LoginPage.INVALID_CREDS_MESSAGE, loginPage.getInvalidCredentialMessage());
+    }
+
+    @Test
+    public void checkForUpdatedPassword() {
+        //create new user
+        signupPage = mainPage.pushSignUpButton();
+        mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
+                baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        //login as user
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
+        //update password
+        userProfilePage = userDashboardPage.navigateToProfilePage();
+        userDashboardPage = userProfilePage.updatePassword(invalidUser.getBaseUserPassword());
+        Assertions.assertEquals(UserDashboardPage.SUCCEESS_UPDATE_MESSAGE, userDashboardPage.getSuccessfulUpdateMessage());
+        //logout
+        mainPage = userDashboardPage.logOut();
+        //login with new password
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), invalidUser.getBaseUserPassword());
+        Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
+    }
+
+    @Test
+    public void checkForLoginWithOldPasswordAfterUpdate() {
+        //create new user
+        signupPage = mainPage.pushSignUpButton();
+        mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
+                baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        //login as user
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
+        //update password
+        userProfilePage = userDashboardPage.navigateToProfilePage();
+        userDashboardPage = userProfilePage.updatePassword(invalidUser.getBaseUserPassword());
+        Assertions.assertEquals(UserDashboardPage.SUCCEESS_UPDATE_MESSAGE, userDashboardPage.getSuccessfulUpdateMessage());
+        //logout
+        mainPage = userDashboardPage.logOut();
+        //try to login with old password
+        userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
+        Assertions.assertEquals(LoginPage.INVALID_CREDS_MESSAGE, loginPage.getInvalidCredentialMessage());
+    }
+
 }

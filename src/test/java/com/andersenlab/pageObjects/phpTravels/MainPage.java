@@ -5,9 +5,12 @@ import org.openqa.selenium.By;
 
 public class MainPage extends BasePage {
     protected static final By SIGN_UP_BUTTON = By.xpath("(//a[contains(text(),'Signup')])[3]");
-    protected static final By ALERT_SUCCES_MESSAGE = By.xpath("//div[@class=\"alert alert-success signup\"]");
-    public static final String CONFIRMATION_OF_CREATION = "Signup successfull please login.";
+    protected static final By ALERT_SUCCESS_MESSAGE = By.xpath("//div[@class=\"alert alert-success signup\"]");
     protected static final By ERROR_EMAIL_MESSAGE = By.xpath("//div[@class=\"message\"]");
+
+
+    public static final String CONFIRMATION_OF_CREATION = "Signup successfull please login.";
+
 
 
     public TravelsSignupPage pushSignUpButton() {
@@ -16,10 +19,10 @@ public class MainPage extends BasePage {
     }
 
     public String getConfirmationMessage () {
-        return getText(ALERT_SUCCES_MESSAGE);
+        return getText(ALERT_SUCCESS_MESSAGE);
     }
+
     public String getErrorEmailMessage () {
-//        Waiters.waitForElementVisible(ERROR_MESSAGE_WINDOW);
         return getText(ERROR_EMAIL_MESSAGE);
     }
 
