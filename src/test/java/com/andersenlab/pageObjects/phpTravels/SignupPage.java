@@ -1,11 +1,9 @@
 package com.andersenlab.pageObjects.phpTravels;
 
 import com.andersenlab.pageObjects.BasePage;
-import com.andersenlab.pageObjects.crmGeekBrains.DashboardPage;
-import com.andersenlab.utils.Waiters;
 import org.openqa.selenium.By;
 
-public class TravelsSignupPage extends BasePage {
+public class SignupPage extends BasePage {
 
     protected static final By FIRST_NAME_INPUT = By.xpath("//input[@name='first_name']");
     protected static final By LAST_NAME_INPUT = By.xpath("//input[@name='last_name']");
@@ -13,8 +11,8 @@ public class TravelsSignupPage extends BasePage {
     protected static final By EMAIL_INPUT = By.xpath("//input[@name='email']");
     protected static final By PASSWORD_INPUT = By.xpath("//input[@name='password']");
     protected static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']");
-    protected static final By ERROR_MESSAGE_WINDOW = By.xpath("//div[@class=\"contact-form-action\"]");
-
+    protected static final By NAVIGATE_TO_LOGIN_PAGE_BUTTON = By.xpath("(//a[contains(.,'Login')])[3]");
+    protected static final By ACCEPT_COOKIES_BUTTON = By.xpath("//button[@id='cookie_stop']");
 
     public static final String OCCUPIED_EMAIL_MESSAGE = "Email already exist!";
 
@@ -24,40 +22,49 @@ public class TravelsSignupPage extends BasePage {
                 .fillInPhone(phoneNumber)
                 .fillInEmail(baseEmail)
                 .fillInPassword(password)
+                .acceptCookies()
                 .pushSignInButton();
         return new MainPage();
     }
 
-    public TravelsSignupPage fillInFirstName(String firstName) {
+    public SignupPage fillInFirstName(String firstName) {
         enterText(FIRST_NAME_INPUT, firstName);
         return this;
     }
 
-    public TravelsSignupPage fillInLastName(String lastName) {
+    public SignupPage fillInLastName(String lastName) {
         enterText(LAST_NAME_INPUT, lastName);
         return this;
     }
 
-    public TravelsSignupPage fillInPhone(String phoneNumber) {
+    public SignupPage fillInPhone(String phoneNumber) {
         enterText(PHONE_INPUT, phoneNumber);
         return this;
     }
 
-    public TravelsSignupPage fillInEmail(String email) {
+    public SignupPage fillInEmail(String email) {
         enterText(EMAIL_INPUT, email);
         return this;
     }
 
-    public TravelsSignupPage fillInPassword(String password) {
+    public SignupPage fillInPassword(String password) {
         enterText(PASSWORD_INPUT, password);
         return this;
     }
 
-    public TravelsSignupPage pushSignInButton() {
+    public SignupPage pushSignInButton() {
         clickButton(LOGIN_BUTTON);
         return this;
     }
 
+    public LoginPage navigateToLoginPage() {
+        clickButton(NAVIGATE_TO_LOGIN_PAGE_BUTTON);
+        return new LoginPage();
+    }
 
+    public SignupPage acceptCookies() {
+        clickButton(ACCEPT_COOKIES_BUTTON);
+        return this;
+    }
 
 }

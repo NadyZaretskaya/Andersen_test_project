@@ -8,14 +8,11 @@ public class MainPage extends BasePage {
     protected static final By ALERT_SUCCESS_MESSAGE = By.xpath("//div[@class=\"alert alert-success signup\"]");
     protected static final By ERROR_EMAIL_MESSAGE = By.xpath("//div[@class=\"message\"]");
 
-
     public static final String CONFIRMATION_OF_CREATION = "Signup successfull please login.";
 
-
-
-    public TravelsSignupPage pushSignUpButton() {
+    public SignupPage pushSignUpButton() {
         clickButton(SIGN_UP_BUTTON);
-        return new TravelsSignupPage();
+        return new SignupPage();
     }
 
     public String getConfirmationMessage () {

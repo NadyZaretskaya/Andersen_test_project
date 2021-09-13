@@ -1,6 +1,5 @@
 package com.andersenlab.tests;
 
-import com.andersenlab.pageObjects.crmGeekBrains.DashboardPage;
 import com.andersenlab.pageObjects.phpTravels.*;
 import com.andersenlab.users.PhpTravelsUsers;
 import org.junit.jupiter.api.AfterEach;
@@ -16,7 +15,7 @@ public class PhpTravelsTest extends BaseTest{
             "212 654 321", "victoria.ilushina", "999666");
 
     MainPage mainPage;
-    TravelsSignupPage signupPage;
+    SignupPage signupPage;
     LoginPage loginPage;
     UserDashboardPage userDashboardPage;
     UserProfilePage userProfilePage;
@@ -54,7 +53,7 @@ public class PhpTravelsTest extends BaseTest{
         signupPage = mainPage.pushSignUpButton();
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
-        Assertions.assertEquals(TravelsSignupPage.OCCUPIED_EMAIL_MESSAGE, mainPage.getErrorEmailMessage());
+        Assertions.assertEquals(SignupPage.OCCUPIED_EMAIL_MESSAGE, mainPage.getErrorEmailMessage());
     }
 
     @Test
@@ -63,6 +62,7 @@ public class PhpTravelsTest extends BaseTest{
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        loginPage = signupPage.navigateToLoginPage();
         userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
     }
@@ -73,6 +73,7 @@ public class PhpTravelsTest extends BaseTest{
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
+        loginPage = signupPage.navigateToLoginPage();
         userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), invalidUser.getBaseUserPassword());
         Assertions.assertEquals(LoginPage.INVALID_CREDS_MESSAGE, loginPage.getInvalidCredentialMessage());
     }
@@ -85,6 +86,7 @@ public class PhpTravelsTest extends BaseTest{
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
         //login as user
+        loginPage = signupPage.navigateToLoginPage();
         userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
         //update password
@@ -106,6 +108,7 @@ public class PhpTravelsTest extends BaseTest{
                 baseUser.getBaseUserPhone(), baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(MainPage.CONFIRMATION_OF_CREATION, mainPage.getConfirmationMessage());
         //login as user
+        loginPage = signupPage.navigateToLoginPage();
         userDashboardPage = loginPage.login(baseUser.getBaseUserEmail(), baseUser.getBaseUserPassword());
         Assertions.assertEquals(baseUser.getBaseUserName(), userDashboardPage.getLoggedUserName());
         //update password

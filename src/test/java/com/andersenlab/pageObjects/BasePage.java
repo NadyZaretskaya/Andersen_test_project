@@ -62,4 +62,9 @@ public class BasePage {
         element.selectByVisibleText(value);
     }
 
+    protected void clearField(By by) {
+        Waiters.waitForElementClickable(driver, by);
+        findElement(by).clear();
+    }
+
 }

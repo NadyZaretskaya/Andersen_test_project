@@ -23,7 +23,7 @@ public class PhpTravelsUsers {
         this.baseUserLastName = baseUserLastName;
         this.baseUserName = baseUserName;
         this.baseUserPhone = baseUserPhone;
-        this.baseUserEmail = baseUserEmail + date + "@example.com";
+        this.baseUserEmail = baseUserEmail + date.getTime() + "@example.com";
         this.baseUserPassword = baseUserPassword;
 
     }
