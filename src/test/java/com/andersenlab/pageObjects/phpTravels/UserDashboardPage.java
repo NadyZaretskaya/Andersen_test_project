@@ -9,7 +9,7 @@ public class UserDashboardPage extends BasePage {
     protected static final By LOGOUT_BUTTON = By.xpath("(//a[contains(text(),'Logout')])[2]");
     protected static final By SUCCESS_MESSAGE = By.xpath("//div[@class=\"alert alert-success\"]");
 
-    public static final String SUCCEESS_UPDATE_MESSAGE = " Profile updated successfully.";
+    public static final String SUCCEESS_UPDATE_MESSAGE = "Profile updated successfully.";
 
     public String getLoggedUserName () {
         return getText(LOGGED_USER_NAME);

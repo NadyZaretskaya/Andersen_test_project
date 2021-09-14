@@ -10,7 +10,7 @@ public class UserProfilePage extends BasePage {
 
     public UserDashboardPage updatePassword(String password) {
         fillInPassword(password)
-                .fillInSecondAddress("")
+//                .fillInSecondAddress("")
                 .saveUserProfileUpdate();
         return new UserDashboardPage();
     }
@@ -22,12 +22,13 @@ public class UserProfilePage extends BasePage {
     }
 
     public UserProfilePage fillInSecondAddress(String secondAddress) {
-        clearField(NEW_PASSWORD_INPUT);
-        enterText(NEW_PASSWORD_INPUT, secondAddress);
+        clearField(SECOND_ADDRESS_INPUT);
+        enterText(SECOND_ADDRESS_INPUT, secondAddress);
         return this;
     }
 
     public UserProfilePage saveUserProfileUpdate() {
+        scrollToElement(UPDATE_PROFILE_BUTTON);
         isButtonEnabled(UPDATE_PROFILE_BUTTON);
         clickButton(UPDATE_PROFILE_BUTTON);
         return this;

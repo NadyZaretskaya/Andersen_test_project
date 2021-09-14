@@ -3,8 +3,10 @@ package com.andersenlab.pageObjects;
 import com.andersenlab.driver.DriverSingleton;
 import com.andersenlab.utils.Waiters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +19,21 @@ public class BasePage {
         driver.get(url);
     }
 
+    protected void scrollToElement(By by) {
+        WebElement webElement = driver.findElement(by);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     protected void clickButton(By by) {
         waitForElementClickable(by);
         driver.findElement(by).click();
     }
+
 
     protected void enterText(By by, String text) {
         findElement(by).sendKeys(text);
