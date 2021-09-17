@@ -2,6 +2,7 @@ package com.andersenlab.tests;
 
 import com.andersenlab.pageObjects.phpTravels.*;
 import com.andersenlab.users.PhpTravelsUsers;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +39,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Creating of new valid user")
     public void creatingOfNewBaseUser() {
         signupPage = mainPage.pushSignUpButton();
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
@@ -46,6 +48,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Check that we can't create users with same e-mails")
     public void creatingNewUserWithOccupiedEmail() {
         signupPage = mainPage.pushSignUpButton();
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
@@ -57,6 +60,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Login as user with valid credentials")
     public void loginWithValidUser() {
         signupPage = mainPage.pushSignUpButton();
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
@@ -68,6 +72,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Login as user with invalid password")
     public void loginWithInvalidPassword() {
         signupPage = mainPage.pushSignUpButton();
         mainPage = signupPage.createUser(baseUser.getBaseUserName(), baseUser.getBaseUserLastName(),
@@ -79,6 +84,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Update password and login with new one")
     public void checkForUpdatedPassword() {
         //create new user
         signupPage = mainPage.pushSignUpButton();
@@ -101,6 +107,7 @@ public class PhpTravelsTest extends BaseTest{
     }
 
     @Test
+    @Description("Update password and try to login with old")
     public void checkForLoginWithOldPasswordAfterUpdate() {
         //create new user
         signupPage = mainPage.pushSignUpButton();

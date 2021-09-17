@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.crmGeekBrains;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class MyProjectsPage extends BasePage {
@@ -11,6 +12,7 @@ public class MyProjectsPage extends BasePage {
     protected static final By CREATE_PROJECT_BUTTON = By.xpath("//a[@title=\"Создать проект\"]");
     protected static final By CONFIRMATION_MESSAGE_WINDOW = By.xpath("//div[@class=\"message\"]");
 
+    @Step("Click on \"Create new project\" button")
     public CreateNewProjectPage clickCreateProjectButton() {
         clickButton(CREATE_PROJECT_BUTTON);
         waitForElementVisible(CreateNewProjectPage.PAGE_TITLE);

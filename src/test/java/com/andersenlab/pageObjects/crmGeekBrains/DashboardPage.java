@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.crmGeekBrains;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class DashboardPage extends BasePage {
@@ -10,6 +11,7 @@ public class DashboardPage extends BasePage {
     protected static final By PROJECTS_HEADER = By.xpath("//span[text()=\"Проекты\"]");
     protected static final By MY_PROJECTS_BUTTON = By.xpath("//span[text()=\"Мои проекты\"]");
 
+    @Step("Navigate to \"Contracts\" page")
     public ContactsPage navigateToContactsPage () {
         clickButton(CONTRAGENTS_HEADER);
         clickButton(CONTACT_PERSONS_BUTTON);
@@ -17,6 +19,7 @@ public class DashboardPage extends BasePage {
         return new ContactsPage();
     }
 
+    @Step("Navigate to \"Projects\" page")
     public MyProjectsPage navigateToProjectsPage () {
         clickButton(PROJECTS_HEADER);
         clickButton(MY_PROJECTS_BUTTON);

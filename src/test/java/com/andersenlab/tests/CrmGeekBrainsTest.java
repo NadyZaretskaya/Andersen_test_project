@@ -2,10 +2,9 @@ package com.andersenlab.tests;
 
 import com.andersenlab.pageObjects.crmGeekBrains.*;
 import com.andersenlab.users.CrmUsers;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
-
 import java.util.Date;
-
 
 public class CrmGeekBrainsTest extends BaseTest{
     Date date = new Date();
@@ -15,8 +14,6 @@ public class CrmGeekBrainsTest extends BaseTest{
     public final String PROJECT_NAME = "Zaretskay Test Project" + date;
     public static final String BUSINESS_UNIT_VALUE = "1";
     public static final String PROJECT_RESPONSIBLE = "117";
-
-
 
     LoginPage loginPage = new LoginPage();
     DashboardPage dashboardPage;
@@ -39,11 +36,13 @@ public class CrmGeekBrainsTest extends BaseTest{
     }
 
     @Test
+    @Description("Login as admin")
     public void login() {
         dashboardPage = loginPage.loginToCrm(admin.getAdminLogin(), admin.getAdminPassword());
     }
 
     @Test
+    @Description("Creating of new contact person")
     public void checkCreationOfNewContactPerson() {
         dashboardPage = loginPage.loginToCrm(admin.getAdminLogin(), admin.getAdminPassword());
         contactsPage = dashboardPage.navigateToContactsPage();
@@ -54,6 +53,7 @@ public class CrmGeekBrainsTest extends BaseTest{
     }
 
     @Test
+    @Description("Creating of new project")
     public void checkCreationOfNewProject() {
         dashboardPage = loginPage.loginToCrm(admin.getAdminLogin(), admin.getAdminPassword());
         myProjectsPage = dashboardPage.navigateToProjectsPage();
@@ -62,6 +62,5 @@ public class CrmGeekBrainsTest extends BaseTest{
                 contactPerson.getContactLastName() + " " + contactPerson.getContactName());
         Assertions.assertEquals(myProjectsPage.getConfirmationMessage(), MyProjectsPage.CONFIRMATION_OF_CREATION);
     }
-
 
 }

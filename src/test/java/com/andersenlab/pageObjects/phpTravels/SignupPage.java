@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.phpTravels;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class SignupPage extends BasePage {
@@ -22,46 +23,53 @@ public class SignupPage extends BasePage {
                 .fillInPhone(phoneNumber)
                 .fillInEmail(baseEmail)
                 .fillInPassword(password)
-                .acceptCookies()
                 .pushSignInButton();
         return new MainPage();
     }
 
+    @Step("Fill in first name {firstName}.")
     public SignupPage fillInFirstName(String firstName) {
         enterText(FIRST_NAME_INPUT, firstName);
         return this;
     }
 
+    @Step("Fill in last name {lastName}.")
     public SignupPage fillInLastName(String lastName) {
         enterText(LAST_NAME_INPUT, lastName);
         return this;
     }
 
+    @Step("Fill in phone number {phoneNumber}.")
     public SignupPage fillInPhone(String phoneNumber) {
         enterText(PHONE_INPUT, phoneNumber);
         return this;
     }
 
+    @Step("Fill in e-mail {email}.")
     public SignupPage fillInEmail(String email) {
         enterText(EMAIL_INPUT, email);
         return this;
     }
 
+    @Step("Fill in password {password}.")
     public SignupPage fillInPassword(String password) {
         enterText(PASSWORD_INPUT, password);
         return this;
     }
 
+    @Step("Click sign in button.")
     public SignupPage pushSignInButton() {
         clickButton(LOGIN_BUTTON);
         return this;
     }
 
+    @Step("Click on \"Login\" button.")
     public LoginPage navigateToLoginPage() {
         clickButton(NAVIGATE_TO_LOGIN_PAGE_BUTTON);
         return new LoginPage();
     }
 
+    @Step("Accept cookies.")
     public SignupPage acceptCookies() {
         clickButton(ACCEPT_COOKIES_BUTTON);
         return this;

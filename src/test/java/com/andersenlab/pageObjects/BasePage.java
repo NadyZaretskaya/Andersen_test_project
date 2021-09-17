@@ -6,13 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class BasePage {
-//    private static Logger log = LoggerFactory.getLogger(BasePage.class);
     private WebDriver driver = DriverSingleton.getDriver();
 
     public void open(String url) {
@@ -33,7 +29,6 @@ public class BasePage {
         waitForElementClickable(by);
         driver.findElement(by).click();
     }
-
 
     protected void enterText(By by, String text) {
         findElement(by).sendKeys(text);

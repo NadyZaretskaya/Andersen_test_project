@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.phpTravels;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
@@ -11,6 +12,7 @@ public class LoginPage extends BasePage {
 
     public static final String INVALID_CREDS_MESSAGE = "Wrong credentials. try again!";
 
+
     public UserDashboardPage login(String email, String password) {
         fillInEmail(email)
                 .fillInPassword(password)
@@ -18,16 +20,19 @@ public class LoginPage extends BasePage {
         return new UserDashboardPage();
     }
 
+    @Step("Fill in username {firstName}.")
     public LoginPage fillInEmail(String firstName) {
         enterText(EMAIL_INPUT, firstName);
         return this;
     }
 
+    @Step("Fill in password {password}.")
     public LoginPage fillInPassword(String password) {
         enterText(PASSWORD_INPUT, password);
         return this;
     }
 
+    @Step("Click login button.")
     public LoginPage pushLoginButton() {
         clickButton(LOGIN_BUTTON);
         return this;

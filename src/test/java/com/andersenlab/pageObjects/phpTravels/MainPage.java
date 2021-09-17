@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.phpTravels;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class MainPage extends BasePage {
@@ -10,6 +11,7 @@ public class MainPage extends BasePage {
 
     public static final String CONFIRMATION_OF_CREATION = "Signup successfull please login.";
 
+    @Step("Click sign up button.")
     public SignupPage pushSignUpButton() {
         clickButton(SIGN_UP_BUTTON);
         return new SignupPage();

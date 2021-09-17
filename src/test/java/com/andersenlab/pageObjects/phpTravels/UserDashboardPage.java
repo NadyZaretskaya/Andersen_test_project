@@ -1,6 +1,7 @@
 package com.andersenlab.pageObjects.phpTravels;
 
 import com.andersenlab.pageObjects.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class UserDashboardPage extends BasePage {
@@ -15,11 +16,13 @@ public class UserDashboardPage extends BasePage {
         return getText(LOGGED_USER_NAME);
     }
 
+    @Step("Click on \"My profile\" button.")
     public UserProfilePage navigateToProfilePage() {
         clickButton(MY_PROFILE_BUTTON);
         return new UserProfilePage();
     }
 
+    @Step("Click logout button.")
     public MainPage logOut() {
         clickButton(LOGOUT_BUTTON);
         return new MainPage();
